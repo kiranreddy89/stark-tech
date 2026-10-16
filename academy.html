@@ -1,0 +1,463 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>STARKTECH Academy</title>
+<style>
+:root{--nv:#0b1530;--ac:#1c7ed6;--ac2:#0a58ad;--bg:#f6f8fb;--cd:#fff;--bd:#dde3ee;--tx:#14213d;--mu:#5b6b8a;--ok:#1a936f;--wa:#b86e00}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 "Inter","Segoe UI",system-ui,sans-serif;padding-bottom:env(safe-area-inset-bottom,0)}
+h1,h2,h3{margin:0 0 .4em;line-height:1.2}a{color:var(--ac)}button,input{font:inherit}
+header{background:var(--nv);color:#fff;position:sticky;top:0;z-index:5;padding-top:env(safe-area-inset-top,0)}.hd{display:flex;gap:14px;align-items:center;padding:10px 24px;max-width:1240px;margin:auto}
+.logo{font:700 18px/1 "Space Grotesk",system-ui;letter-spacing:.12em;cursor:pointer;white-space:nowrap}
+.hd input{flex:1;min-width:0;border:1px solid #2b3d6b;background:#12204a;color:#fff;border-radius:99px;padding:9px 16px}.hd input::placeholder{color:#9db0d8}
+.lk{background:0;border:0;color:#dce6ff;cursor:pointer;padding:6px 8px;white-space:nowrap}.lk:hover{color:#fff}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:6px;padding:10px 18px;font-weight:600;cursor:pointer}.btn:hover{background:var(--ac2)}.btn.o{background:#fff;color:var(--ac);border:1px solid var(--ac)}.btn.w{width:100%}
+:focus-visible{outline:2px solid #6fb3ff;outline-offset:2px}
+.wrap{max-width:1240px;margin:auto;padding:24px}
+.hero{background:linear-gradient(120deg,#0b1530,#15356e);color:#fff}.hero .wrap{padding:48px 24px}.hero h1{font-size:clamp(28px,4.5vw,46px);max-width:15em}.hero p{max-width:36em;color:#cfdcff;font-size:17px}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:20px}.stats b{display:block;font-size:24px}.stats span{color:#aebfe6;font-size:13px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--bd);margin-bottom:18px;overflow-x:auto}.tabs button{background:0;border:0;padding:12px 16px;cursor:pointer;color:var(--mu);border-bottom:3px solid transparent;white-space:nowrap}.tabs .on{color:var(--tx);border-color:var(--ac);font-weight:600}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.chip{border:1px solid var(--bd);background:#fff;border-radius:99px;padding:6px 14px;cursor:pointer;color:var(--mu)}.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.cc{background:var(--cd);border:1px solid var(--bd);border-radius:10px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:box-shadow .15s}.cc:hover{box-shadow:0 6px 20px #14213d1f}
+.th{height:130px;display:flex;align-items:flex-end;padding:12px;color:#fff;font:700 18px "Space Grotesk",system-ui}.cb{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column;gap:4px}.cb h3{font-size:16px}
+.mu{color:var(--mu);font-size:13px}.star{color:#e59819;font-weight:700}.tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;margin-right:4px;background:#e8f1fc;color:var(--ac2)}.tag.syn{background:#fff1da;color:var(--wa)}.tag.real{background:#e1f6ee;color:var(--ok)}
+.bar{height:6px;background:#e5eaf3;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ok)}
+.dt{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}.box{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-bottom:16px}
+.side{position:sticky;top:76px}.mod{border:1px solid var(--bd);border-radius:8px;margin-bottom:8px;background:#fff}.mod>div:first-child{padding:10px 14px;font-weight:600;background:#f0f4fa;border-radius:8px 8px 0 0}
+.ls{display:flex;gap:10px;align-items:center;padding:8px 14px;border-top:1px solid var(--bd)}.ls input{width:18px;height:18px}
+.term{background:#0b1220;color:#7ee2b8;font:12px/1.6 ui-monospace,Consolas,monospace;border-radius:8px;padding:12px;min-height:90px;white-space:pre-wrap}
+.modal{position:fixed;inset:0;background:#0b153099;display:flex;align-items:center;justify-content:center;z-index:9;padding:16px}.modal>div{background:#fff;border-radius:12px;padding:22px;max-width:400px;width:100%}.modal input{width:100%;padding:10px;border:1px solid var(--bd);border-radius:6px;margin:6px 0}
+.cert{border:3px double var(--ac);border-radius:10px;padding:22px;text-align:center;background:#fff}
+footer{color:var(--mu);font-size:12px;text-align:center;padding:24px}
+@media(max-width:860px){.dt{grid-template-columns:1fr}.side{position:static}.hd{padding:10px 14px;flex-wrap:wrap}.hd input{order:9;flex-basis:100%}.wrap{padding:16px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.chat-shell{max-width:920px;margin:24px auto;background:#fff;border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px #0b15300d}
+.chat-hdr{background:linear-gradient(135deg,#0b1530,#15356e);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.chat-hdr h2{margin:0;font-size:19px;display:flex;align-items:center;gap:10px}
+.chat-body{height:460px;overflow-y:auto;padding:20px;background:#f8fafc;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+.msg{display:flex;gap:12px;max-width:85%}
+.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.msg.bot{align-self:flex-start}
+.msg-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:#0b1530;color:#fff}
+.msg.user .msg-av{background:var(--ac)}
+.msg-bub{padding:12px 16px;border-radius:12px;font-size:14px;line-height:1.6}
+.msg.user .msg-bub{background:var(--ac);color:#fff;border-bottom-right-radius:2px}
+.msg.bot .msg-bub{background:#fff;color:var(--tx);border:1px solid var(--bd);border-bottom-left-radius:2px;box-shadow:0 2px 8px #0b153008}
+.msg.bot pre{background:#0b1220;color:#7ee2b8;padding:10px;border-radius:6px;overflow-x:auto;font:12px/1.5 ui-monospace,Consolas,monospace;margin:8px 0}
+.msg.bot code{background:#eef2f8;color:#0a58ad;padding:2px 5px;border-radius:4px;font-family:ui-monospace,Consolas,monospace;font-size:12.5px}
+.msg.bot pre code{background:transparent;color:inherit;padding:0}
+.chat-foot{padding:14px 20px;background:#fff;border-top:1px solid var(--bd)}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.pill{background:#edf4fc;color:var(--ac2);border:1px solid #d3e4f7;border-radius:99px;padding:5px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.pill:hover{background:var(--ac);color:#fff;border-color:var(--ac)}
+.chat-bar{display:flex;gap:10px;align-items:center}
+.chat-bar input{flex:1;padding:12px 16px;border:1px solid var(--bd);border-radius:8px;font-size:14px}
+.chat-bar input:focus{border-color:var(--ac);outline:0}
+.chat-bar select{padding:11px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:#fff;color:var(--tx);max-width:180px}
+.pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:#1a936f;box-shadow:0 0 0 0 rgba(26,147,111,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(26,147,111,.7)}70%{box-shadow:0 0 0 8px rgba(26,147,111,0)}100%{box-shadow:0 0 0 0 rgba(26,147,111,0)}}
+.clearance-box{max-width:760px;margin:32px auto;background:#fff;border:1px solid var(--bd);border-radius:14px;padding:36px;box-shadow:0 12px 35px #0b153012;text-align:center}
+.clearance-badge{display:inline-flex;align-items:center;gap:6px;background:#e1f6ee;color:#0ca678;padding:6px 14px;border-radius:99px;font-weight:700;font-size:12px;letter-spacing:.08em;margin-bottom:16px}
+.progress-strip{height:6px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:20px 0}
+.progress-strip-fill{height:100%;background:linear-gradient(90deg,var(--ac),#1098ad);width:0%;animation:fillProgress 2.5s forwards ease-in-out}
+@keyframes fillProgress{0%{width:0%}100%{width:100%}}
+.gw-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:920px;margin:30px auto}
+@media(max-width:768px){.gw-grid{grid-template-columns:1fr}}
+.gw-card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;transition:box-shadow .2s}
+.gw-card:hover{box-shadow:0 8px 24px #0b153012}
+</style></head><body>
+<header><div class="hd"><div class="logo" onclick="nav('home')">STARKTECH</div><input id="q" placeholder="Search courses, technologies, labs" oninput="S.q=this.value;S.tab='courses';S.course=null;draw()" aria-label="Search"><span id="nav"></span></div></header>
+<div id="app"></div><footer>STARKTECH · demo platform. Ratings and learner counts are sample data. Technologies marked Synthetic are fictional StarkTech internal technologies, not real products.</footer><div id="md"></div>
+<script>
+const $=s=>document.querySelector(s);
+async function api(p,o={}){try{const r=await fetch(p,Object.assign({headers:{'Content-Type':'application/json'}},o));if(!r.ok)throw 0;return await r.json()}catch(e){return null}}
+const FB=[["PYTHON","Python",1,"AI & Machine Learning","Stable","Beginner"],["LINUX","Linux",1,"Cybersecurity","Stable","Beginner"],["STK-NEURALCORE","STK-NeuralCore",0,"AI & Machine Learning","Experimental","Advanced"],["STK-CIPHERGRID","STK-CipherGrid",0,"Cybersecurity","Stable","Intermediate"]].map(a=>({id:a[0],name:a[1],real:a[2],cat:a[3],st:a[4],df:a[5]}));
+const GR=["#1c7ed6,#0b3d91","#7048e8,#3b2a9b","#0ca678,#066650","#e8590c,#a13a05","#d6336c,#8a1b44","#1098ad,#0b5f6e"];
+const MODS=[["Foundations",["What it is and why it matters","Core vocabulary","Setting up your environment"]],["Core concepts",["How it works under the hood","Common patterns","Design trade-offs"]],["Hands-on practice",["Guided walkthrough","Build a small project","Debug and optimize"]],["Assessment",["Knowledge check","Capstone review","Next steps"]]];
+const PATHS=[["Cybersecurity Specialist",["Linux","Wireshark","Kali Linux","CipherGrid","AegisNet"],"Cybersecurity → Networking → Linux → Cryptography → Threat Detection → AI Security"],["AI Engineer",["Python","PyTorch","TensorFlow","NeuralCore","EdgeMind"],"AI → Python → Machine Learning → Deep Learning → LLMs → RAG → AI Agents"],["Cloud & Platform Engineer",["Linux","Docker","Kubernetes","PostgreSQL","NexusOS"],"Containers → Orchestration → Data → Platform operations"]];
+const S={tab:"home",q:"",cat:"All",course:null,user:null,courses:[],labs:[],tree:[],prog:{}};
+const key=()=>"stk_prog_"+(S.user?S.user.id:"guest");
+async function loadP(){
+  try{S.prog=JSON.parse(localStorage.getItem(key())||"{}")}catch(e){S.prog={}}
+  if(S.user){
+    const r=await api(`/api/learning/progress/${S.user.id}`);
+    if(r&&typeof r==="object"){
+      S.prog=Object.assign({},S.prog,r);
+      try{localStorage.setItem(key(),JSON.stringify(S.prog))}catch(e){}
+    }
+  }
+}
+async function saveP(id){
+  try{localStorage.setItem(key(),JSON.stringify(S.prog))}catch(e){}
+  if(S.user&&id){
+    api(`/api/learning/progress/${S.user.id}`,{
+      method:'POST',
+      body:JSON.stringify({courseId:id,completedLessons:S.prog[id]||[]})
+    });
+  }
+}
+function mk(t,i){const h=4+i%9;return{id:t.id,tech:t,title:(t.real?"Complete ":"")+t.name+(t.real?" Bootcamp":" Fundamentals"),cat:t.cat,lvl:t.df,hrs:h,rate:(4.3+(i*3%7)/10).toFixed(1),n:(900+i*417).toLocaleString(),inst:["Maya Patel","Dr. Sarah Wilson","Liam Chen","David Carter"][i%4],g:GR[i%6].split(","),status:t.st}}
+const tot=c=>MODS.reduce((a,m)=>a+m[1].length,0),done=c=>(S.prog[c.id]||[]).length,pct=c=>Math.round(done(c)*100/tot(c));
+async function init(){
+  const [t,l,lr,cfg]=await Promise.all([
+    api('/api/technologies'),
+    api('/api/labs'),
+    api('/api/learning'),
+    api('/api/sentinel/config')
+  ]);
+  const techs=Array.isArray(t)&&t.length?t:FB;
+  S.courses=techs.map(mk);
+  S.labs=(l&&l.labs)||[];
+  S.tree=(lr&&lr.tree)||[];
+  S.live=!!t;
+  if(cfg){
+    S.sentinelConfig=cfg;
+    if(cfg.ollamaActiveModel) S.sentinelActiveModel=`Qwen 2.5 (Ollama ${cfg.ollamaActiveModel})`;
+    else if(cfg.llmModelDisplay) S.sentinelActiveModel=cfg.llmModelDisplay;
+  }
+  await loadP();
+  draw();
+}
+function nav(t){S.tab=t;S.course=null;S.q="";$("#q").value="";draw();scrollTo(0,0)}
+function bar(v){return`<div class="bar"><i style="width:${v}%"></i></div>`}
+function tags(c){return(c.tech.real?'<span class="tag real">REAL TECHNOLOGY</span>':'<span class="tag syn">SYNTHETIC · STARKTECH INTERNAL</span>')+(c.status=="Experimental"||c.status=="Research"||c.status=="Deprecated"?`<span class="tag">${c.status.toUpperCase()}</span>`:"")}
+function card(c){const p=pct(c);return`<div class="cc" tabindex="0" role="button" onclick="open_('${c.id}')" onkeydown="if(event.key=='Enter')open_('${c.id}')"><div class="th" style="background:linear-gradient(135deg,${c.g[0]},${c.g[1]})">${c.tech.name}</div><div class="cb"><h3>${c.title}</h3><div class="mu">${c.inst}</div><div><span class="star">${c.rate}</span> <span class="mu">(${c.n} learners)</span></div><div class="mu">${c.lvl} · ${c.hrs} hours · ${c.cat}</div><div>${tags(c)}</div>${S.prog[c.id]?`<div style="margin-top:6px">${bar(p)}<div class="mu">${p}% complete</div></div>`:'<b style="margin-top:auto">Free</b>'}</div></div>`}
+function open_(id){S.course=S.courses.find(c=>c.id==id);S.tab="courses";draw();scrollTo(0,0)}
+function head(){$("#nav").innerHTML=`<button class="lk" onclick="nav('courses')">Courses</button><button class="lk" onclick="nav('paths')">Paths</button><button class="lk" onclick="nav('labs')">Labs</button><button class="lk" onclick="nav('sentinel')">Sentinel AI</button><button class="lk" onclick="nav('mine')">My learning</button>${S.user?`<button class="lk" onclick="out()">${S.user.name.split(" ")[0]} · Sign out</button>`:'<button class="btn" onclick="signin()">Sign in</button>'}`}
+function draw(){head();const a=$("#app");if(S.course)return a.innerHTML=detail(S.course);const T={home,courses,paths,labs,sentinel,mine}[S.tab]||home;a.innerHTML=T()}
+function fmtMd(t){
+  if(!t)return'';
+  let s=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  s=s.replace(/```([a-z0-9_-]*)\n([\s\S]*?)```/gi,(m,l,c)=>`<pre><code>${c.trim()}</code></pre>`);
+  s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  s=s.replace(/^### (.*$)/gim,'<h4 style="margin:10px 0 4px;color:var(--nv)">$1</h4>');
+  s=s.replace(/^## (.*$)/gim,'<h3 style="margin:12px 0 6px;color:var(--nv)">$1</h3>');
+  s=s.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');
+  s=s.replace(/\*([^*]+)\*/g,'<i>$1</i>');
+  s=s.replace(/^• (.*$)/gim,'<div style="padding-left:12px">• $1</div>');
+  s=s.replace(/^\* (.*$)/gim,'<div style="padding-left:12px">• $1</div>');
+  s=s.replace(/^- (.*$)/gim,'<div style="padding-left:12px">• $1</div>');
+  s=s.replace(/\n\n/g,'<div style="height:8px"></div>');
+  s=s.replace(/\n/g,'<br>');
+  return s;
+}
+
+async function quickAuth(em,tab='sentinel'){
+  const r=await api('/api/auth/login',{method:'POST',body:JSON.stringify({identifier:em,password:'123456789'})});
+  if(r&&r.user){
+    S.user=r.user;
+    await loadP();
+    S.tab=tab;
+    draw();
+  }
+}
+
+function initChatHistory(){
+  if(S.chatHistory&&S.chatHistory.length)return;
+  const isTeacher=S.user&&S.user.role==='Teacher';
+  const name=S.user?S.user.name.split(' ')[0]:'Learner';
+  S.chatHistory=[{
+    role:'assistant',
+    model:'Qwen 2.5 3B',
+    time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),
+    content:isTeacher?
+      `Welcome Professor **${name}**! 👩‍🏫 I am **STARKTECH Sentinel Course AI**, powered by the **Qwen 2.5 3B** engine from our Multi-Agent Engine.\n\nI can assist you with:\n* 📝 Creating customized course syllabus modules and lesson plans\n* 🧪 Formulating lab challenges, tasks, and grading rubrics\n* 🔬 Deep technical concept breakdowns across all 18 curriculum tracks\n* 📊 Progress assessment and prerequisites guidance\n\nHow can I help with your teaching today?`:
+      `Hello **${name}**! 🎓 I am **STARKTECH Sentinel Course AI**, powered by the **Qwen 2.5 3B** engine from our Multi-Agent Engine.\n\nI'm your intelligent academic assistant for all STARKTECH tracks:\n* 🎯 Finding the best courses and learning paths for your career goals\n* 💻 Step-by-step guidance and debugging for hands-on labs\n* 🧠 Mastering real tech (Python, Linux, Docker, PyTorch) & internal tech (STK-NeuralCore, STK-CipherGrid)\n* 📚 Personalized study schedules and code explanations\n\nWhat would you like to learn or build today?`
+  }];
+}
+
+function sentinel(){
+  if(!S.user)return sentinelGuest();
+  const r=S.user.role;
+  const isDevOrResearcher=(r==='Developer'||r==='Researcher'||r==='Engineer'||r==='Administrator');
+  if(isDevOrResearcher&&!S.sentinelDevChatMode)return sentinelDeveloper();
+  return sentinelChat();
+}
+
+function sentinelGuest(){
+  return`<div class="hero"><div class="wrap"><h1>STARKTECH Sentinel AI</h1><p>Intelligent dual-mode intelligence architecture: Academic Course AI Chatbot for Students & Teachers, and Multi-Agent Threat Workspace for Developers & Researchers.</p><div style="margin-top:14px"><span class="tag real">QWEN 2.5 3B POWERED</span> <span class="tag syn">MULTI-AGENT WORKSPACE</span></div></div></div>
+<div class="wrap">
+  <div style="text-align:center;max-width:640px;margin:28px auto 10px"><h2 style="font-size:24px">Select Your Access Gateway</h2><p class="mu">Choose your role to access the corresponding Sentinel AI environment.</p></div>
+  <div class="gw-grid">
+    <div class="gw-card">
+      <div>
+        <div style="font-size:38px;margin-bottom:12px">🎓</div>
+        <h3>Student & Teacher Portal</h3>
+        <p class="mu" style="line-height:1.6;margin:12px 0 20px">
+          Connect directly to our <b>Hugging Face Qwen 2.5 3B</b> model configured in the Multi-Agent Engine. Works as an interactive course tutor, lab assistant, and pedagogical advisor.
+        </p>
+        <div style="background:#f0f4fa;border-radius:8px;padding:12px;font-size:12.5px;color:var(--nv);margin-bottom:20px">
+          <b>Features:</b> Course recommendations, lab walkthroughs, code debugging, and study roadmaps.
+        </div>
+      </div>
+      <div>
+        <button class="btn w" onclick="quickAuth('alex.johnson@starktech.demo')">Sign in as Student (Alex Johnson)</button>
+        <button class="btn o w" style="margin-top:8px" onclick="quickAuth('maya.patel@starktech.demo')">Sign in as Teacher (Maya Patel)</button>
+      </div>
+    </div>
+    <div class="gw-card">
+      <div>
+        <div style="font-size:38px;margin-bottom:12px">🛡️</div>
+        <h3>Developer & Researcher Portal</h3>
+        <p class="mu" style="line-height:1.6;margin:12px 0 20px">
+          Access the original <b>SentinelAI Multi-Agent Security Engine</b>. Features autonomous Planning, Research, Validation, and Execution agents with ChromaDB RAG.
+        </p>
+        <div style="background:#f0f4fa;border-radius:8px;padding:12px;font-size:12.5px;color:var(--nv);margin-bottom:20px">
+          <b>Features:</b> Threat intelligence, MITRE ATT&CK alignment, CVE extraction, and containment playbooks.
+        </div>
+      </div>
+      <div>
+        <button class="btn w" style="background:#14213d" onclick="quickAuth('david.carter@starktech.demo')">Sign in as Developer (David Carter)</button>
+        <button class="btn o w" style="margin-top:8px" onclick="quickAuth('sarah.wilson@starktech.demo')">Sign in as Researcher (Dr. Sarah Wilson)</button>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+function sentinelDeveloper(){
+  if(S.redirectTimer)clearTimeout(S.redirectTimer);
+  S.redirectTimer=setTimeout(()=>{window.location.href='/sentinel-ai/';},2600);
+  return`<div class="hero"><div class="wrap"><h1>STARKTECH Sentinel AI</h1><p>Restricted access multi-agent threat analyst and security intelligence workspace.</p><div style="margin-top:14px"><span class="tag real">LEVEL 1 AUTHORIZATION</span> <span class="tag syn">DEVELOPER & RESEARCHER CLEARANCE</span></div></div></div>
+<div class="wrap">
+  <div class="clearance-box">
+    <div class="clearance-badge"><span class="pulse"></span> CLEARANCE LEVEL 1: ${S.user.role.toUpperCase()} GRANTED</div>
+    <div style="font-size:46px;margin-bottom:10px">🛡️</div>
+    <h2>Redirecting to SentinelAI Workspace</h2>
+    <p class="mu" style="font-size:15px;max-width:540px;margin:12px auto;line-height:1.6">
+      Welcome, <b>${S.user.name}</b> (${S.user.dept}). Your credentials permit direct access to the <b>SentinelAI Multi-Agent Threat Analyst Workspace</b> powered by Qwen 2.5 3B and ChromaDB RAG.
+    </p>
+    <div class="progress-strip"><div class="progress-strip-fill"></div></div>
+    <p class="mu" style="font-size:13px">Redirecting to <code>/sentinel-ai/</code> in 3 seconds...</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px">
+      <a href="/sentinel-ai/" class="btn" style="text-decoration:none">🚀 Launch SentinelAI Workspace Now</a>
+      <button class="btn o" onclick="clearTimeout(S.redirectTimer);S.sentinelDevChatMode=true;draw()">💬 Switch to Course Chatbot Mode</button>
+      <button class="btn o" onclick="clearTimeout(S.redirectTimer);nav('home')">← Back to Academy</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:32px;text-align:left">
+      <div style="background:#f8fafc;border:1px solid var(--bd);border-radius:8px;padding:12px">
+        <b style="font-size:12px;color:var(--ac)">AGENT 1</b>
+        <div style="font-weight:600;font-size:13px">Planning Agent</div>
+        <div class="mu" style="font-size:11px">Intent & roadmap</div>
+      </div>
+      <div style="background:#f8fafc;border:1px solid var(--bd);border-radius:8px;padding:12px">
+        <b style="font-size:12px;color:var(--ac)">AGENT 2</b>
+        <div style="font-weight:600;font-size:13px">Research Agent</div>
+        <div class="mu" style="font-size:11px">ChromaDB RAG & IOCs</div>
+      </div>
+      <div style="background:#f8fafc;border:1px solid var(--bd);border-radius:8px;padding:12px">
+        <b style="font-size:12px;color:var(--ac)">AGENT 3</b>
+        <div style="font-weight:600;font-size:13px">Validation Agent</div>
+        <div class="mu" style="font-size:11px">MITRE ATT&CK mapping</div>
+      </div>
+      <div style="background:#f8fafc;border:1px solid var(--bd);border-radius:8px;padding:12px">
+        <b style="font-size:12px;color:var(--ac)">AGENT 4</b>
+        <div style="font-weight:600;font-size:13px">Execution Agent</div>
+        <div class="mu" style="font-size:11px">Containment playbooks</div>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+function sentinelChat(){
+  initChatHistory();
+  const isTeacher=S.user&&S.user.role==='Teacher';
+  const roleName=S.user?S.user.role:'Student';
+  const activeModelDisplay=S.sentinelActiveModel||(S.sentinelConfig&&S.sentinelConfig.ollamaActiveModel?`Qwen 2.5 (Ollama ${S.sentinelConfig.ollamaActiveModel})`:'Qwen 2.5 3B');
+  const pills=isTeacher?[
+    "📝 Help me create a lab assignment on Docker",
+    "📊 Suggest a grading rubric for Python API lab",
+    "💡 Explain STK-NeuralCore for undergraduate students",
+    "🎯 Design a 6-week curriculum for Cybersecurity"
+  ]:[
+    "🎯 Recommend a study path for me",
+    "🧠 Explain STK-NeuralCore vs PyTorch",
+    "🔐 How does STK-CipherGrid mesh work?",
+    "🧪 Step-by-step help for Linux hardening lab",
+    "💻 How do I write a secure API in Python?"
+  ];
+
+  const courseOptions=["All Courses",...S.courses.map(c=>c.tech.name)];
+
+  setTimeout(()=>{
+    const b=$("#chat-box");
+    if(b)b.scrollTop=b.scrollHeight;
+  },50);
+
+  return`<div class="hero"><div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+      <div>
+        <h1>STARKTECH Sentinel AI</h1>
+        <p>Interactive Course Intelligence & Academic Advisor powered by <b>Qwen 2.5</b> from Multi-Agent Engine.</p>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="tag real">${roleName.toUpperCase()} MODE: ${S.user.name}</span>
+          <span class="tag" style="background:#e0f2fe;color:#0369a1">MODEL: ${activeModelDisplay}</span>
+          <button class="btn o" style="background:transparent;color:#fff;border-color:#ffffff66;padding:3px 10px;font-size:11.5px;cursor:pointer" onclick="openModelSettings()">⚙️ Model Settings</button>
+          ${(roleName==='Developer'||roleName==='Researcher')?`<button class="lk" style="text-decoration:underline;color:#a5d6a7;padding:0 8px" onclick="S.sentinelDevChatMode=false;draw()">→ Open Multi-Agent Workspace</button>`:''}
+        </div>
+      </div>
+      <div style="text-align:right">
+        <button class="btn o" style="background:transparent;color:#fff;border-color:#ffffff55" onclick="clearChat()">Clear Chat</button>
+      </div>
+    </div>
+  </div></div>
+  <div class="wrap">
+    <div class="chat-shell">
+      <div class="chat-hdr">
+        <h2><span>🤖</span> Sentinel Course Assistant</h2>
+        <div style="font-size:12.5px;color:#cfdcff;display:flex;align-items:center;gap:8px">
+          <span class="pulse"></span> <span>Engine: ${activeModelDisplay}</span>
+        </div>
+      </div>
+      <div class="chat-body" id="chat-box">
+        ${S.chatHistory.map(m=>`
+          <div class="msg ${m.role==='user'?'user':'bot'}">
+            <div class="msg-av">${m.role==='user'?'👤':'🤖'}</div>
+            <div class="msg-bub">
+              ${m.role==='user'?m.content:fmtMd(m.content)}
+              <div style="font-size:11px;color:${m.role==='user'?'#dce6ff':'var(--mu)'};margin-top:4px;display:flex;justify-content:space-between">
+                <span>${m.time||''}</span>
+                ${m.model?`<span style="opacity:0.8">${m.model}</span>`:''}
+              </div>
+            </div>
+          </div>
+        `).join('')}
+        ${S.chatLoading?`
+          <div class="msg bot">
+            <div class="msg-av">🤖</div>
+            <div class="msg-bub" style="background:#fff;display:flex;align-items:center;gap:8px">
+              <span class="pulse"></span>
+              <span class="mu" style="font-size:13px">${activeModelDisplay} is formulating response...</span>
+            </div>
+          </div>
+        `:''}
+      </div>
+      <div class="chat-foot">
+        <div class="pills">
+          ${pills.map(p=>`<button class="pill" onclick="sendChat('${p.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">${p}</button>`).join('')}
+        </div>
+        <form class="chat-bar" onsubmit="event.preventDefault();sendChat($('#chat-in').value)">
+          <select id="chat-ctx" onchange="S.chatCourse=this.value" title="Select course context">
+            ${courseOptions.map(o=>`<option value="${o}" ${S.chatCourse===o?'selected':''}>${o}</option>`).join('')}
+          </select>
+          <input id="chat-in" placeholder="Ask Sentinel AI anything about courses, code, labs, or curriculum..." autocomplete="off">
+          <button type="submit" class="btn" style="padding:10px 20px" ${S.chatLoading?'disabled':''}>Send</button>
+        </form>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function openModelSettings(){
+  const cfg=await api('/api/sentinel/config')||{};
+  $("#md").innerHTML=`<div class="modal" onclick="if(event.target==this)this.innerHTML=''">
+    <div style="max-width:540px;background:#fff;border-radius:12px;padding:24px;box-shadow:0 20px 40px rgba(0,0,0,0.3);text-align:left">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <h2 style="margin:0;font-size:20px;color:#0f172a">⚙️ Sentinel AI Model Settings</h2>
+        <button style="border:none;background:none;font-size:20px;cursor:pointer;color:#64748b" onclick="$('#md').innerHTML=''">✕</button>
+      </div>
+      <p style="font-size:13px;color:#64748b;margin-bottom:14px">Configure which Qwen 2.5 engine powers your student/teacher chatbot.</p>
+      
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-bottom:14px">
+        <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase">Active Intelligence Engine</div>
+        <div style="font-size:14px;color:#0284c7;font-weight:700;margin-top:2px">${S.sentinelActiveModel||(cfg.ollamaActiveModel?`Qwen 2.5 (Ollama ${cfg.ollamaActiveModel})`:'Qwen 2.5 3B')}</div>
+        <div style="font-size:12px;color:#475569;margin-top:4px">
+          Local Ollama: <b>${cfg.ollamaActiveModel?'✅ Connected ('+cfg.ollamaActiveModel+')':'⚠️ No model found'}</b>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px">
+        <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:6px">LLM Provider Preference</label>
+        <select id="cfg-prov" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;box-sizing:border-box">
+          <option value="ollama" ${cfg.llmProvider==='ollama'||!cfg.hfApiKeyConfigured?'selected':''}>Local Ollama (${cfg.ollamaActiveModel||'qwen2.5:0.5b'} - Fast, Unlimited, Offline)</option>
+          <option value="huggingface" ${cfg.llmProvider==='huggingface'?'selected':''}>Hugging Face Router (Qwen/Qwen2.5-Coder-3B-Instruct)</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:18px">
+        <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:6px">Hugging Face API Token (Optional)</label>
+        <input id="cfg-token" type="password" placeholder="hf_xxxxxxxxxxxxxxxxxxxx" value="" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;box-sizing:border-box">
+        <div style="font-size:11px;color:#94a3b8;margin-top:4px">Current Key: ${cfg.hfApiKeyMasked||'None'}. Leave empty to keep existing.</div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:8px">
+        <button class="btn o" onclick="$('#md').innerHTML=''">Cancel</button>
+        <button class="btn" onclick="saveModelSettings()">Save Configuration</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function saveModelSettings(){
+  const prov=$("#cfg-prov")?$("#cfg-prov").value:'ollama';
+  const token=$("#cfg-token")?$("#cfg-token").value.trim():'';
+  const body={llmProvider:prov};
+  if(token)body.hfApiKey=token;
+  const r=await api('/api/sentinel/config',{method:'POST',body:JSON.stringify(body)});
+  if(r&&r.success){
+    S.sentinelActiveModel=prov==='ollama'?`Qwen 2.5 (Local Ollama)`:'Qwen 2.5 3B (Hugging Face)';
+    $("#md").innerHTML='';
+    draw();
+  }
+}
+
+function clearChat(){
+  S.chatHistory=[];
+  initChatHistory();
+  draw();
+}
+
+async function sendChat(txt){
+  const msg=(txt||($('#chat-in')&&$('#chat-in').value)||'').trim();
+  if(!msg||S.chatLoading)return;
+  if($('#chat-in'))$('#chat-in').value='';
+
+  const time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  S.chatHistory.push({role:'user',content:msg,time});
+  S.chatLoading=true;
+  draw();
+
+  const r=await api('/api/sentinel/chat',{
+    method:'POST',
+    body:JSON.stringify({
+      message:msg,
+      history:S.chatHistory,
+      role:S.user?S.user.role:'Student',
+      courseContext:S.chatCourse||'All Courses'
+    })
+  });
+
+  S.chatLoading=false;
+  if(r&&r.reply){
+    if(r.model)S.sentinelActiveModel=r.model;
+    S.chatHistory.push({
+      role:'assistant',
+      content:r.reply,
+      model:r.model||S.sentinelActiveModel||'Qwen 2.5',
+      time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
+    });
+  }else{
+    S.chatHistory.push({
+      role:'assistant',
+      content:'Could not retrieve response from Sentinel AI. Please verify backend connectivity.',
+      model:'System Alert',
+      time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
+    });
+  }
+  draw();
+}
+function home(){const mine=S.courses.filter(c=>S.prog[c.id]);return`<div class="hero"><div class="wrap"><h1>Learn technology by building it.</h1><p>Structured courses, learning paths and hands-on labs across AI, cybersecurity, cloud and more, including StarkTech's own synthetic technologies.</p><div class="stats"><div><b>${S.courses.length}</b><span>Courses</span></div><div><b>${S.labs.length||"–"}</b><span>Hands-on labs</span></div><div><b>${PATHS.length}</b><span>Learning paths</span></div><div><b>Free</b><span>All content</span></div></div><p style="margin-top:22px"><button class="btn" onclick="nav('courses')">Browse courses</button> <button class="btn o" onclick="nav('paths')">View learning paths</button></p>${S.live?"":'<div class="mu" style="color:#ffd48a">Backend not reachable, showing sample catalog. Start the server with npm start.</div>'}</div></div><div class="wrap">${mine.length?`<h2>Continue learning</h2><div class="grid" style="margin-bottom:28px">${mine.slice(0,4).map(card).join("")}</div>`:""}<h2>Featured courses</h2><div class="grid">${S.courses.slice(0,8).map(card).join("")}</div></div>`}
+function courses(){const cats=["All",...new Set(S.courses.map(c=>c.cat))],q=S.q.toLowerCase(),L=S.courses.filter(c=>(S.cat=="All"||c.cat==S.cat)&&(c.title+c.cat+c.tech.name).toLowerCase().includes(q));return`<div class="wrap"><h1>All courses</h1><div class="chips">${cats.map(x=>`<button class="chip ${x==S.cat?"on":""}" onclick="S.cat='${x.replace("'","")}';draw()">${x}</button>`).join("")}</div><div class="grid">${L.map(card).join("")||'<p class="mu">No courses match. Clear the search or pick another category.</p>'}</div></div>`}
+function paths(){return`<div class="wrap"><h1>Learning paths</h1><p class="mu">Follow a sequence of courses toward a role.</p>${PATHS.map(([n,k,d])=>{const cs=k.map(x=>S.courses.find(c=>c.tech.name.toLowerCase().replace("stk-","").includes(x.toLowerCase().replace(" ","-"))||c.tech.name.toLowerCase().includes(x.toLowerCase()))).filter(Boolean);const p=cs.length?Math.round(cs.reduce((a,c)=>a+pct(c),0)/cs.length):0;return`<div class="box"><h2>${n}</h2><div class="mu">${d}</div><div style="margin:10px 0">${bar(p)}<div class="mu">${p}% complete · ${cs.length} courses</div></div><div class="grid">${cs.map(card).join("")}</div></div>`}).join("")}</div>`}
+function labs(){const L=S.labs;return`<div class="wrap"><h1>Hands-on labs</h1>${L.length?`<div class="grid">${L.map(l=>`<div class="box"><div class="mu">${l.id} · ${l.env}</div><h3>${l.title}</h3><div class="mu">${l.tech} · ${l.df} · ${l.min} min</div><p><span class="tag">${l.st}</span></p><button class="btn o" onclick="lab('${l.id}')">Launch lab</button></div>`).join("")}</div>`:'<p class="mu">Labs load from the backend. Start the server to see them.</p>'}</div>`}
+function mine(){if(!S.user)return`<div class="wrap"><h1>My learning</h1><p>Sign in to track your progress and earn certificates.</p><button class="btn" onclick="signin()">Sign in</button></div>`;const m=S.courses.filter(c=>S.prog[c.id]);return`<div class="wrap"><h1>My learning</h1>${m.length?`<div class="grid">${m.map(card).join("")}</div>`:'<p class="mu">You have not enrolled in a course yet. Pick one from the catalog.</p>'}${S.tree.length?`<div class="box" style="margin-top:22px"><h3>Skill progression</h3>${S.tree.map(([a,v])=>`<div class="mu">${a} · ${v}%</div>${bar(v)}`).join("")}</div>`:""}</div>`}
+function detail(c){const en=!!S.prog[c.id],p=pct(c),rl=S.labs.filter(l=>l.tech==c.tech.name);return`<div class="hero"><div class="wrap"><button class="lk" onclick="S.course=null;draw()">← Back to courses</button><h1>${c.title}</h1><p>${c.tech.real?"A practical introduction to "+c.tech.name+" using real tools and guided exercises.":c.tech.name+" is a fictional StarkTech internal technology used for safe experimentation. Not a real-world product."}</p><div>${tags(c)}</div><div class="mu" style="color:#cfdcff"><span class="star">${c.rate}</span> · ${c.n} learners · Taught by ${c.inst}</div></div></div>
+<div class="wrap dt"><div><div class="box"><h2>What you'll learn</h2><ul><li>Explain the core ideas behind ${c.tech.name}</li><li>Complete a guided hands-on exercise</li><li>Apply it in a small project and review your results</li></ul></div><h2>Course content</h2><div class="mu" style="margin-bottom:8px">${MODS.length} modules · ${tot(c)} lessons · ${c.hrs} hours</div>${MODS.map((m,mi)=>`<div class="mod"><div>${m[0]}</div>${m[1].map((x,li)=>{const k=mi*3+li,ck=(S.prog[c.id]||[]).includes(k);return`<label class="ls"><input type="checkbox" ${ck?"checked":""} ${en?"":"disabled"} onchange="tg('${c.id}',${k})"> ${x}</label>`}).join("")}</div>`).join("")}${rl.length?`<h2 style="margin-top:20px">Related labs</h2>${rl.map(l=>`<div class="box"><b>${l.id} · ${l.title}</b> <span class="mu">${l.min} min</span><p><button class="btn o" onclick="lab('${l.id}')">Launch lab</button></p></div>`).join("")}`:""}</div>
+<div class="side"><div class="box"><h2>Free</h2>${en?`${bar(p)}<div class="mu" style="margin:6px 0 12px">${p}% complete</div>${p==100?`<div class="cert"><b>Certificate of completion</b><div>${S.user.name}</div><div class="mu">${c.title}</div></div>`:'<div class="mu">Tick lessons as you finish them.</div>'}`:`<button class="btn w" onclick="enroll('${c.id}')">Enroll now</button>`}<p class="mu">${c.lvl} level · ${c.hrs} hours · Certificate on completion</p></div></div></div>`}
+function enroll(id){if(!S.user)return signin();S.prog[id]=S.prog[id]||[];saveP(id);draw()}
+function tg(id,k){const a=S.prog[id]||[],i=a.indexOf(k);i<0?a.push(k):a.splice(i,1);S.prog[id]=a;saveP(id);draw()}
+function signin(m){$("#md").innerHTML=`<div class="modal" onclick="if(event.target==this)this.innerHTML=''"><div><h2>Sign in</h2><div style="color:#c92a2a">${m||""}</div><input id="em" placeholder="Email or User ID" value="alex.johnson@starktech.demo"><input id="pw" type="password" placeholder="Password" value="123456789"><div class="mu" style="margin:4px 0 6px">Quick pick demo account:</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px"><button class="btn o" style="padding:4px 8px;font-size:12px" onclick="$('#em').value='alex.johnson@starktech.demo'">Student</button><button class="btn o" style="padding:4px 8px;font-size:12px" onclick="$('#em').value='maya.patel@starktech.demo'">Teacher</button><button class="btn o" style="padding:4px 8px;font-size:12px" onclick="$('#em').value='david.carter@starktech.demo'">Developer</button><button class="btn o" style="padding:4px 8px;font-size:12px" onclick="$('#em').value='sarah.wilson@starktech.demo'">Researcher</button></div><p class="mu" style="font-size:11px">Password 123456789 is for demo use.</p><button class="btn w" onclick="auth()">Sign in</button></div></div>`}
+async function auth(){const r=await api('/api/auth/login',{method:'POST',body:JSON.stringify({identifier:$("#em").value.trim(),password:$("#pw").value})});if(r&&r.user){S.user=r.user;await loadP();$("#md").innerHTML="";draw()}else signin(r&&r.error?r.error:"Sign-in failed. Check your details and that the server is running.")}
+function out(){S.user=null;S.prog={};draw()}
+async function lab(id){const l=S.labs.find(x=>x.id==id);if(!l)return;$("#md").innerHTML=`<div class="modal" onclick="if(event.target==this)this.innerHTML=''"><div style="max-width:520px"><h2>${l.id} · ${l.title}</h2><div class="term" id="tm">$ lab start ${id}\nstarting ${l.env}...</div><p><button class="btn o" onclick="subm('${id}')">Submit experiment</button></p></div></div>`;const r=await api(`/api/labs/${id}/start`,{method:'POST'});$("#tm").textContent+=r&&r.success?`\n${r.terminal||"environment ready."}`:"\ncould not reach backend."}
+async function subm(id){const r=await api(`/api/labs/${id}/submit`,{method:'POST',body:JSON.stringify({code:'print("lab")',terminalOutput:$("#tm").textContent,userId:S.user?S.user.id:null})});$("#tm").textContent+=r&&r.success?`\n${r.message||"submission saved."}`:"\nsubmission failed. Sign in and retry."}
+init();
+</script></body></html>

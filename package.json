@@ -1,0 +1,23 @@
+{
+  "name": "stark-tech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "agents": "cd \"Multi-Agent Engine\" && .\\venv\\Scripts\\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000",
+    "test": "node test-api.js",
+    "test:sentinel": "node test-sentinel-integration.js",
+    "test:attacks": "node test-attacks.js",
+    "test:all": "node test-api.js && node test-sentinel-integration.js && node test-attacks.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
